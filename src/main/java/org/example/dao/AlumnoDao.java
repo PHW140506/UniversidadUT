@@ -85,4 +85,25 @@ public class AlumnoDao {
         }
         return actualizado;
     }
+    // Agrega estos métodos al final de tu clase AlumnoDao existente
+
+    public boolean eliminarAlumno(int idAlum) {
+        boolean eliminado = false;
+        String sql = "DELETE FROM ALUMNOS WHERE id_alum = ?";
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, idAlum);
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                eliminado = true;
+                System.out.println("Alumno dado de baja correctamente de la base de datos.");
+            } else {
+                System.out.println("No se encontró ningún alumno con ese número de expediente.");
+            }
+        } catch (SQLException err) {
+            System.out.println("Error al eliminar Alumno: " + err.getMessage());
+        }
+        return eliminado;
+    }
 }

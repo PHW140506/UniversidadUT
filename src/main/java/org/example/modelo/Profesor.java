@@ -5,9 +5,13 @@ public class Profesor extends Personal {
     private String puesto;
     private double sueldo;
 
+    public Profesor() {
+        super("", "");
+    }
+
     public Profesor(String nombre, String curp, int id_prof, String puesto, double sueldo) {
         super(nombre, curp);
-        setId_prof(id_prof);    
+        setId_prof(id_prof);
         setPuesto(puesto);
         setSueldo(sueldo);
     }
@@ -17,7 +21,11 @@ public class Profesor extends Personal {
     }
 
     public void setId_prof(int id_prof) {
-        this.id_prof = id_prof;
+        if (id_prof > 0) {
+            this.id_prof = id_prof;
+        } else {
+            System.out.println("El ID del profesor debe ser un número positivo.");
+        }
     }
 
     public String getPuesto() {
@@ -25,7 +33,11 @@ public class Profesor extends Personal {
     }
 
     public void setPuesto(String puesto) {
-        this.puesto = puesto;
+        if (puesto != null && !puesto.trim().isEmpty()) {
+            this.puesto = puesto;
+        } else {
+            System.out.println("El puesto no puede estar vacío.");
+        }
     }
 
     public double getSueldo() {
@@ -33,15 +45,15 @@ public class Profesor extends Personal {
     }
 
     public void setSueldo(double sueldo) {
-        this.sueldo = sueldo;
+        if (sueldo >= 0) {
+            this.sueldo = sueldo;
+        } else {
+            System.out.println("El sueldo no puede ser negativo.");
+        }
     }
 
     @Override
     public String toString() {
-        return "Profesor{" +
-                "id_prof=" + id_prof +
-                ", puesto='" + puesto + '\'' +
-                ", sueldo=" + sueldo +
-                '}';
+        return "Profesor = id_prof = " + getId_prof() + super.toString() + ", puesto = " + puesto + ", sueldo = " + sueldo;
     }
 }

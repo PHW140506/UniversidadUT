@@ -53,13 +53,7 @@ public class Alumno extends Personal {
 
     @Override
     public String toString() {
-        return "Alumno{" +
-                "id_alumno=" + getId_alumno() +
-                super.toString() +
-                ", grado=" + getGrado() +
-                ", promedio=" + getPromedio() +
-                '}' +
-                "------------------------------------------------"
-                ;
+        return "Alumno = id_alumno = "+getId_alumno()+super.toString()+", grado = "+getGrado()+", promedio = "+getPromedio();
     }
 }
+/// Alumno 1. id_alumno = 0, nombre = osvaldo, curp = dasdasdas, grado = 2, promedio = 67

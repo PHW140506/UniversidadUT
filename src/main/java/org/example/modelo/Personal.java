@@ -26,9 +26,7 @@ public class Personal {
 
     @Override
     public String toString() {
-        return "Profesor{" +
-                "nombre='" + nombre + '\'' +
-                ", curp='" + curp + '\'' +
-                '}';
+        return " , nombre = "+nombre+", curp = "+curp;
     }
 }
+/// Alumno 1. id_alumno = 0, nombre = osvaldo, curp = dasdasdas, grado = 2, promedio = 67
