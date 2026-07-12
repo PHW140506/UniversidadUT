@@ -132,7 +132,7 @@ public class Menu {
     private static void menuAlumnos() throws IOException {
         int op = 0;
         while (op != 5) {
-            System.out.println("\n--- MÓDULO ALUMNOS ---");
+            System.out.println("\n--- FUNCIONES PARA ALUMNOS ---");
             System.out.println("1. Inscribir alumno");
             System.out.println("2. Visualizar alumnos");
             System.out.println("3. Actualizar alumno");
@@ -153,7 +153,7 @@ public class Menu {
     private static void menuProfesores() throws IOException {
         int op = 0;
         while (op != 5) {
-            System.out.println("\n--- MÓDULO PROFESORES ---");
+            System.out.println("\n--- FUNCIONES PARA PROFESORES ---");
             System.out.println("1. Registrar profesor");
             System.out.println("2. Visualizar profesores");
             System.out.println("3. Actualizar profesor");

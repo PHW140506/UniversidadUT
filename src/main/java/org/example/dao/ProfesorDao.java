@@ -13,7 +13,7 @@ public class ProfesorDao {
 
     public boolean inscribirProfesor(Profesor profesor) {
         boolean inscrito = false;
-        String sql = "INSERT INTO maestro (id_prof, nombre, curp, puesto, sueldo) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO MAESTRO (id_maest, nombre, curp, puesto, sueldo) VALUES (?,?,?,?,?)";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
@@ -37,14 +37,14 @@ public class ProfesorDao {
 
     public ArrayList<Profesor> extraerProfesor() {
         ArrayList<Profesor> profesores = new ArrayList<>();
-        String sql = "SELECT * FROM maestro";
+        String sql = "SELECT * FROM MAESTRO";
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql);
              ResultSet rs = stm.executeQuery()) {
 
             while (rs.next()) {
                 Profesor prof = new Profesor();
-                prof.setId_prof(rs.getInt("id_prof"));
+                prof.setId_prof(rs.getInt("id_maest"));
                 prof.setNombre(rs.getString("nombre"));
                 prof.setCurp(rs.getString("curp"));
                 prof.setPuesto(rs.getString("puesto"));
@@ -59,7 +59,7 @@ public class ProfesorDao {
 
     public boolean actualizar(Profesor profesor) {
         boolean actualizado = false;
-        String sql = "UPDATE maestro SET nombre = ?, curp = ?, puesto = ?, sueldo = ? WHERE id_prof = ?";
+        String sql = "UPDATE MAESTRO SET nombre = ?, curp = ?, puesto = ?, sueldo = ? WHERE id_maest = ?";
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
@@ -84,7 +84,7 @@ public class ProfesorDao {
 
     public boolean eliminarProfesor(int idProf) {
         boolean eliminado = false;
-        String sql = "DELETE FROM maestro WHERE id_prof = ?";
+        String sql = "DELETE FROM MAESTRO WHERE id_maest = ?";
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
