@@ -101,4 +101,26 @@ public class ProfesorDao {
         }
         return eliminado;
     }
+    public Profesor buscarProfesor(int idProf) {
+        Profesor prof = null;
+        String sql = "SELECT * FROM MAESTRO WHERE id_maest = ?";
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, idProf);
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    prof = new Profesor();
+                    prof.setId_prof(rs.getInt("id_maest"));
+                    prof.setNombre(rs.getString("nombre"));
+                    prof.setCurp(rs.getString("curp"));
+                    prof.setPuesto(rs.getString("puesto"));
+                    prof.setSueldo(rs.getDouble("sueldo"));
+                }
+            }
+        } catch (SQLException err) {
+            System.out.println("Error al buscar profesor: " + err.getMessage());
+        }
+        return prof;
+    }
 }

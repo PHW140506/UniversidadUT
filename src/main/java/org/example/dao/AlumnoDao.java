@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class AlumnoDao {
     public boolean inscribirAlumno(Alumno alumno) {
         boolean inscrito = false;
-        // El orden de las columnas en tu SQL es: id_alum, nombre, curp, promedio, grado
+
         String sql = "INSERT INTO ALUMNOS (id_alum, nombre, curp, promedio, grado) VALUES(?,?,?,?,?)";
 
         try (Connection conexion = Conexion.conectar();
@@ -23,7 +23,7 @@ public class AlumnoDao {
             stm.setString(2, alumno.getNombre());
             stm.setString(3, alumno.getCurp());
             stm.setDouble(4, alumno.getPromedio());
-            stm.setInt(5, alumno.getGrado()); // Ahora envía un int
+            stm.setInt(5, alumno.getGrado());
             System.out.println(stm);
             int filasAfectadas = stm.executeUpdate();
             if (filasAfectadas > 0) {
@@ -85,7 +85,6 @@ public class AlumnoDao {
         }
         return actualizado;
     }
-    // Agrega estos métodos al final de tu clase AlumnoDao existente
 
     public boolean eliminarAlumno(int idAlum) {
         boolean eliminado = false;
@@ -105,5 +104,27 @@ public class AlumnoDao {
             System.out.println("Error al eliminar Alumno: " + err.getMessage());
         }
         return eliminado;
+    }
+    public Alumno buscarAlumno(int idAlum) {
+        Alumno alumno = null;
+        String sql = "SELECT * FROM ALUMNOS WHERE id_alum = ?";
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, idAlum);
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    alumno = new Alumno();
+                    alumno.setId_alumno(rs.getInt("id_alum"));
+                    alumno.setNombre(rs.getString("nombre"));
+                    alumno.setCurp(rs.getString("curp"));
+                    alumno.setPromedio(rs.getDouble("promedio"));
+                    alumno.setGrado(rs.getInt("grado"));
+                }
+            }
+        } catch (SQLException err) {
+            System.out.println("Error al buscar Alumno: " + err.getMessage());
+        }
+        return alumno;
     }
 }
