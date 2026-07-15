@@ -3,6 +3,7 @@ package org.example.vista;
 import org.example.dao.AlumnoDao;
 import org.example.dao.ProfesorDao;
 import org.example.modelo.Alumno;
+import org.example.modelo.PersonaUT;
 import org.example.modelo.Profesor;
 
 import java.io.BufferedReader;
@@ -33,7 +34,7 @@ public class Menu {
 
     public static void mostrarDatosAlumnos() {
         ArrayList<Alumno> alumnos = alumnoDao.extraerAlumno();
-        System.out.println("\n========== LISTA DE ALUMNOS ==========");
+        System.out.println("\n                  ALUMNOS                  ");
         for (Alumno a : alumnos) {
             System.out.println(a);
         }
@@ -60,6 +61,7 @@ public class Menu {
         int id = Integer.parseInt(leer.readLine());
         alumnoDao.eliminarAlumno(id);
     }
+
     public static void buscarAlum() throws IOException {
         System.out.println("Escribe el NUMERO DE EXPEDIENTE del alumno a buscar: ");
         int id = Integer.parseInt(leer.readLine());
@@ -90,7 +92,7 @@ public class Menu {
 
     public static void mostrarDatosProfesores() {
         ArrayList<Profesor> profesores = profesorDao.extraerProfesor();
-        System.out.println("\n========== F       DE PROFESORES ==========");
+        System.out.println("\n                  PROFESORES                  ");
         for (Profesor p : profesores) {
             System.out.println(p);
         }
@@ -112,6 +114,7 @@ public class Menu {
 
         profesorDao.actualizar(profesor);
     }
+
     public static void buscarProfesor() throws IOException {
         System.out.println("Escribe el ID del profesor a buscar: ");
         int id = Integer.parseInt(leer.readLine());
@@ -129,29 +132,60 @@ public class Menu {
         profesorDao.eliminarProfesor(id);
     }
 
+    // Nueva función con requerimientos de Polimorfismo e Interfaces
+    private static void mostrarComunidadUniversitaria(){
+        ArrayList<PersonaUT> comunidad = new ArrayList<>();
+
+        // Agregamos polimórficamente tanto alumnos como profesores
+        comunidad.addAll(alumnoDao.extraerAlumno());
+        comunidad.addAll(profesorDao.extraerProfesor());
+
+        System.out.println("\n====== COMUNIDAD UNIVERSITARIA UTsjr ======");
+        for (PersonaUT persona : comunidad) {
+            // Imprime usando el toString polimórfico
+            System.out.println(persona);
+
+            // Comprobación y llamada a los métodos de las interfaces
+            if (persona instanceof Alumno) {
+                Alumno alum = (Alumno) persona;
+                alum.aprender();
+                alum.recibirEvaluacion();
+            } else if (persona instanceof Profesor) {
+                Profesor prof = (Profesor) persona;
+                prof.ensenar();
+                prof.evaluar();
+            }
+            System.out.println("------------------------------------------");
+        }
+    }
+
     // ================= MENÚ =================
     public static void menu() throws IOException {
         int op = 0;
-        while (op != 3) {
+        while (op != 4) {
             System.out.println("\n****** UNIVERSIDAD UTsjr ******");
             System.out.println("1. Funciones para Alumnos");
             System.out.println("2. Funciones para Profesores");
-            System.out.println("3. Salir de la aplicación");
+            System.out.println("3. Mostrar Comunidad Universitaria");
+            System.out.println("4. Salir de la aplicación");
             System.out.print("Elige una opción: ");
             op = Integer.parseInt(leer.readLine());
 
             switch (op) {
                 case 1: menuAlumnos(); break;
                 case 2: menuProfesores(); break;
-                case 3: System.out.println("Fin del programa. phw"); break;
-                default: System.out.println("Tienes que escoger un numero del 1 al 3 usuario");
+                case 3:
+                    mostrarComunidadUniversitaria();
+                    break; // Corregido: Agregado break faltante
+                case 4: System.out.println("Fin del programa. phw"); break;
+                default: System.out.println("Tienes que escoger un numero del 1 al 4 usuario");
             }
         }
     }
 
     private static void menuAlumnos() throws IOException {
         int op = 0;
-        while (op != 5) {
+        while (op != 6) {
             System.out.println("\n--- FUNCIONES PARA ALUMNOS ---");
             System.out.println("1. Inscribir alumno");
             System.out.println("2. Visualizar alumnos");
@@ -174,7 +208,7 @@ public class Menu {
 
     private static void menuProfesores() throws IOException {
         int op = 0;
-        while (op != 5) {
+        while (op != 6) {
             System.out.println("\n--- FUNCIONES PARA PROFESORES ---");
             System.out.println("1. Registrar profesor");
             System.out.println("2. Visualizar profesores");

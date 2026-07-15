@@ -1,18 +1,37 @@
 package org.example.modelo;
 
-public class Alumno extends Personal {
+import org.example.interfaces.Ensenable;
+import org.example.interfaces.Evaluable;
+
+public class Alumno extends PersonaUT implements Ensenable, Evaluable {
     private int id_alumno;
-    private int grado; // Cambiado de String grupo a int grado
+    private int grado;
     private double promedio;
 
     public Alumno(){
         super("", "");
     }
+
     public Alumno(int id_alumno, String nombre, String curp, int grado, double promedio) {
         super(nombre, curp);
         setId_alumno(id_alumno);
         setGrado(grado);
         setPromedio(promedio);
+    }
+
+    @Override
+    public String mostrarTipoPersona() {
+        return "Alumno";
+    }
+
+    @Override
+    public void aprender() {
+        System.out.println("-> El alumno " + getNombre() + " está aprendiendo desarrollo de software.");
+    }
+
+    @Override
+    public void recibirEvaluacion() {
+        System.out.println("-> El alumno " + getNombre() + " está resolviendo su evaluación.");
     }
 
     public int getId_alumno() {
@@ -53,7 +72,7 @@ public class Alumno extends Personal {
 
     @Override
     public String toString() {
-        return "Alumno = id_alumno = "+getId_alumno()+super.toString()+", grado = "+getGrado()+", promedio = "+getPromedio();
+        // super.toString() invoca a PersonaUT.toString() el cual ya incluye mostrarTipoPersona()
+        return "Alumno = id_alumno = " + getId_alumno() + super.toString() + ", grado = " + getGrado() + ", promedio = " + getPromedio();
     }
 }
-/// Alumno 1. id_alumno = 0, nombre = osvaldo, curp = dasdasdas, grado = 2, promedio = 67

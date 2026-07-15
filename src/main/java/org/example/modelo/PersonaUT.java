@@ -1,12 +1,16 @@
 package org.example.modelo;
 
-public class Personal {
+public abstract class PersonaUT {
     private String nombre;
     private String curp;
-    public Personal(String nombre, String curp) {
+
+    public PersonaUT(String nombre, String curp) {
         this.nombre = nombre;
         this.curp = curp;
     }
+
+    // Método abstracto: no lleva llaves {}, sólo define la estructura obligatoria
+    public abstract String mostrarTipoPersona();
 
     public String getNombre() {
         return nombre;
@@ -26,7 +30,7 @@ public class Personal {
 
     @Override
     public String toString() {
-        return " , nombre = "+nombre+", curp = "+curp;
+        // Llama dinámicamente a mostrarTipoPersona() gracias al polimorfismo
+        return " Tipo: " + mostrarTipoPersona() + ", nombre = " + nombre + ", curp = " + curp;
     }
 }
-/// Alumno 1. id_alumno = 0, nombre = osvaldo, curp = dasdasdas, grado = 2, promedio = 67

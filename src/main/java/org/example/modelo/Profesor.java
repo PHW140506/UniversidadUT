@@ -1,6 +1,9 @@
 package org.example.modelo;
 
-public class Profesor extends Personal {
+import org.example.interfaces.Ensenador;
+import org.example.interfaces.Evaluador;
+
+public class Profesor extends PersonaUT implements Ensenador, Evaluador {
     private int id_prof;
     private String puesto;
     private double sueldo;
@@ -14,6 +17,21 @@ public class Profesor extends Personal {
         setId_prof(id_prof);
         setPuesto(puesto);
         setSueldo(sueldo);
+    }
+
+    @Override
+    public String mostrarTipoPersona() {
+        return "Profesor";
+    }
+
+    @Override
+    public void ensenar() {
+        System.out.println("-> El profesor " + getNombre() + " está dictando cátedra.");
+    }
+
+    @Override
+    public void evaluar() {
+        System.out.println("-> El profesor " + getNombre() + " está evaluando los proyectos.");
     }
 
     public int getId_prof() {
