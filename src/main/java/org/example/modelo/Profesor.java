@@ -26,12 +26,12 @@ public class Profesor extends PersonaUT implements Ensenador, Evaluador {
 
     @Override
     public void ensenar() {
-        System.out.println("-> El profesor " + getNombre() + " está dictando cátedra.");
+        System.out.println("El profesor " + getNombre() + " está dictando cátedra.");
     }
 
     @Override
     public void evaluar() {
-        System.out.println("-> El profesor " + getNombre() + " está evaluando los proyectos.");
+        System.out.println("El profesor " + getNombre() + " está evaluando los proyectos.");
     }
 
     public int getId_prof() {

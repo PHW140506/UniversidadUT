@@ -26,12 +26,12 @@ public class Alumno extends PersonaUT implements Ensenable, Evaluable {
 
     @Override
     public void aprender() {
-        System.out.println("-> El alumno " + getNombre() + " está aprendiendo desarrollo de software.");
+        System.out.println("El alumno " + getNombre() + " está aprendiendo desarrollo de software.");
     }
 
     @Override
     public void recibirEvaluacion() {
-        System.out.println("-> El alumno " + getNombre() + " está resolviendo su evaluación.");
+        System.out.println("El alumno " + getNombre() + " está resolviendo su evaluación.");
     }
 
     public int getId_alumno() {
@@ -72,7 +72,6 @@ public class Alumno extends PersonaUT implements Ensenable, Evaluable {
 
     @Override
     public String toString() {
-        // super.toString() invoca a PersonaUT.toString() el cual ya incluye mostrarTipoPersona()
         return "Alumno = id_alumno = " + getId_alumno() + super.toString() + ", grado = " + getGrado() + ", promedio = " + getPromedio();
     }
 }

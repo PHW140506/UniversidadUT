@@ -9,7 +9,6 @@ public abstract class PersonaUT {
         this.curp = curp;
     }
 
-    // Método abstracto: no lleva llaves {}, sólo define la estructura obligatoria
     public abstract String mostrarTipoPersona();
 
     public String getNombre() {
@@ -30,7 +29,7 @@ public abstract class PersonaUT {
 
     @Override
     public String toString() {
-        // Llama dinámicamente a mostrarTipoPersona() gracias al polimorfismo
+
         return " Tipo: " + mostrarTipoPersona() + ", nombre = " + nombre + ", curp = " + curp;
     }
 }

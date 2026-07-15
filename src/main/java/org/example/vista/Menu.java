@@ -132,28 +132,29 @@ public class Menu {
         profesorDao.eliminarProfesor(id);
     }
 
-    // Nueva función con requerimientos de Polimorfismo e Interfaces
     private static void mostrarComunidadUniversitaria(){
         ArrayList<PersonaUT> comunidad = new ArrayList<>();
 
-        // Agregamos polimórficamente tanto alumnos como profesores
         comunidad.addAll(alumnoDao.extraerAlumno());
         comunidad.addAll(profesorDao.extraerProfesor());
 
-        System.out.println("\n====== COMUNIDAD UNIVERSITARIA UTsjr ======");
+        System.out.println("\n----------- COMUNIDAD UNIVERSITARIA -----------");
         for (PersonaUT persona : comunidad) {
             // Imprime usando el toString polimórfico
-            System.out.println(persona);
-
-            // Comprobación y llamada a los métodos de las interfaces
             if (persona instanceof Alumno) {
+                System.out.println("\nAlumno");
+                System.out.println(persona);
                 Alumno alum = (Alumno) persona;
                 alum.aprender();
                 alum.recibirEvaluacion();
+                System.out.println("\n");
             } else if (persona instanceof Profesor) {
+                System.out.println("\nProfesor");
+                System.out.println(persona);
                 Profesor prof = (Profesor) persona;
                 prof.ensenar();
                 prof.evaluar();
+                System.out.println("\n");
             }
             System.out.println("------------------------------------------");
         }
